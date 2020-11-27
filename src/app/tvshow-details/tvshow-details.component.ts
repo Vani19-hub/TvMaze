@@ -60,7 +60,6 @@ export class TvshowDetailsComponent implements OnInit {
 
   showSeason(season): void {
     // dynamic tabs based on data
-    console.log(season);
     this.seasonType = season;
   }
 }
