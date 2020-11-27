@@ -25,9 +25,9 @@
          <div class="col d-flex justify-content-center">
             <a class="card getDetails"  target="_blank" rel="noopener" (click)="getShowDetails(show.id)" *ngIf="show.image !== null">
             <div>
-               <img class="card-img-top" src={{show.image.medium}} alt="Card image">
-               <p>{{show.name}}</p>
-               <p class="rating">{{show.rating.average}}/10</p>
+               <img class="card-img-top" src={{show?.image?.medium}} alt="Card image">
+               <p>{{show?.name}}</p>
+               <p class="rating">{{show?.rating?.average}}/10</p>
             </div>
             </a>
          </div>
