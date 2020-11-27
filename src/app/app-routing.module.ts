@@ -10,7 +10,7 @@ export const routes: Routes = [
   { path: 'home', component: TvshowsComponent },
   { path: '404', component: NotfoundComponent },
   { path: 'showDetails/:id', component: TvshowDetailsComponent },
-  { path: '**', redirectTo: '/404' },
+  { path: '**', redirectTo: '/404', pathMatch: 'full' },
 ];
 
 @NgModule({

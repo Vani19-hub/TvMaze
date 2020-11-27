@@ -42,7 +42,6 @@ export class TvshowsComponent implements OnInit {
           this.allShows = this.selectedShows;
         }
         this.showGenreBased = [...new Set(this.showGenreBased)];
-        console.log(this.showGenreBased);
       },
       (error) => {
         this.error = error;
@@ -51,7 +50,7 @@ export class TvshowsComponent implements OnInit {
   }
 
   chooseGenre(e: any): void {
-    // Selecting genre from list of categoried
+    // Selecting genre from list of categories
     this.selectedGenre = e.target.value;
     this.myInputVariable.nativeElement.value = '';
     this.getAllShows(this.selectedGenre);

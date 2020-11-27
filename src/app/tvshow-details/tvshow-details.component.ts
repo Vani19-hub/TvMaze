@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { TvshowService } from '../common/tvshow.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tvshow-details',
@@ -11,14 +12,14 @@ import { TvshowService } from '../common/tvshow.service';
 export class TvshowDetailsComponent implements OnInit {
   id: number;
   showDetails = [];
-  showSummary;
   seasonsEpisodes;
   seasonType = 1;
   noofSeasons = [];
 
   constructor(
     private tvshowservice: TvshowService,
-    private router: ActivatedRoute
+    private actRouter: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,19 +30,17 @@ export class TvshowDetailsComponent implements OnInit {
 
   getshowDetails(): void {
     // getting each show details
-    this.router.params.subscribe((params) => {
+    this.actRouter.params.subscribe((params) => {
       // tslint:disable-next-line: radix
       this.id = parseInt(params.id);
     });
     this.tvshowservice.getShowDetails(this.id).subscribe(
       (response) => {
         this.showDetails.push(response);
-        this.showSummary = this.showDetails[0].summary.replace(
-          /<\/?[^>]+(>|$)/g,
-          ''
-        );
       },
-      (error) => {}
+      (error) => {
+        this.router.navigate(['/404']);
+      }
     );
   }
 

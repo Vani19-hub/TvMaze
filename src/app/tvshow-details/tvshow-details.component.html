@@ -6,25 +6,26 @@
                <div >
                   <a class="card" target="_blank" rel="noopener">
                      <div>
-                        <img class="card-img-top" src={{showDetails.image.medium}}  alt="Card image">
+                        <img class="card-img-top" src={{showDetails?.image?.medium}}  alt="Card image">
                      </div>
                   </a>
                </div>
             </div>
          </div>
          <div class="col-sm-3">
-            <h4>{{showDetails.name}}</h4>
-            <h6>Rating : {{showDetails.rating.average}}/10</h6>
-            <h6>Time : {{showDetails.schedule.time}}</h6>
-            <h6>Days : {{showDetails.schedule.days}}</h6>
-            <h6>Genre : {{showDetails.genres[0]}}</h6>
-            <h6>Language : {{showDetails.language}} </h6>
-            <h6>Premiered : {{showDetails.premiered}}</h6>
+            <h4>{{showDetails?.name}}</h4>
+            <h6>Rating : {{showDetails?.rating.average}}/10</h6>
+            <h6>Time : {{showDetails?.schedule.time}}</h6>
+            <h6>Days : {{showDetails?.schedule.days}}</h6>
+            <h6>Genre : {{showDetails?.genres[0]}}</h6>
+            <h6>Language : {{showDetails?.language}} </h6>
+            <h6>Premiered : {{showDetails?.premiered}}</h6>
          </div>
+         <div class="jumbotron">
+            <p [innerHTML]="showDetails?.summary"></p>    
+        </div>
       </div>
-      <div class="jumbotron">
-         <p>{{showSummary}}</p>
-      </div>
+  
    </div>
 
    <ul class="nav nav-tabs mb-3" id="tab" role="tablist" overflowMode='Scrollable'>
@@ -41,7 +42,7 @@
                      <a class="card" target="_blank" rel="noopener" *ngIf="eachepisode.season == season">
                         <div>
                            {{eachepisode.name.replaceAll('.','')}}
-                           <img class="card-img-top" src={{eachepisode.image.medium}} alt="Card image">
+                           <img class="card-img-top" src={{eachepisode?.image?.medium}} alt="Card image">
                         </div>
                      </a>
                   </div>

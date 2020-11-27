@@ -1,4 +1,4 @@
-export interface AllShows {
+export class AllShows {
   id: number;
   url: string;
   name: string;
