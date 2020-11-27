@@ -2,6 +2,27 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
+Angular project to show list of shows based on Categories(Genre) and Rating.
+
+# UI frameworks and Angular version
+
+Bootstrap Framework - 4.0
+HTML5
+CSS3
+Angular - @angular/cli - 10.2.0 ,
+Node
+Typescript
+
+# Unit test frameworks
+
+Jasmine and karma
+
+# clone repository
+
+$git https://github.com/Vani19-hub/TvMaze.gitRun
+
+Run 'npm install' to install dependencies
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
