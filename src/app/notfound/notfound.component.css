@@ -1,0 +1,24 @@
+section div:nth-child(1), section div:nth-child(3){
+    color: blue;
+    font-size: 25px;
+}
+  
+
+section div:nth-child(1){
+    margin-top: 20px;
+
+}
+
+section div:nth-child(2){
+    width: 50%;
+
+}
+
+.dashboard-card {
+    position: absolute;
+    top: 100px;
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+}
+ 

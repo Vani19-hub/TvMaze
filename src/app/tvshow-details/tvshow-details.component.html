@@ -1,0 +1,53 @@
+<div class="content" role="main">
+   <div class="container">
+      <div class="row" *ngFor="let showDetails of showDetails">
+         <div class="col-sm-3">
+            <div class="card-container">
+               <div >
+                  <a class="card" target="_blank" rel="noopener">
+                     <div>
+                        <img class="card-img-top" src={{showDetails.image.medium}}  alt="Card image">
+                     </div>
+                  </a>
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-3">
+            <h4>{{showDetails.name}}</h4>
+            <h6>Rating : {{showDetails.rating.average}}/10</h6>
+            <h6>Time : {{showDetails.schedule.time}}</h6>
+            <h6>Days : {{showDetails.schedule.days}}</h6>
+            <h6>Genre : {{showDetails.genres[0]}}</h6>
+            <h6>Language : {{showDetails.language}} </h6>
+            <h6>Premiered : {{showDetails.premiered}}</h6>
+         </div>
+      </div>
+      <div class="jumbotron">
+         <p>{{showSummary}}</p>
+      </div>
+   </div>
+
+   <ul class="nav nav-tabs mb-3" id="tab" role="tablist" overflowMode='Scrollable'>
+      <li class="nav-item" *ngFor="let season of noofSeasons">
+         <a class="nav-link" id="seasonTabs" [ngClass]="{'hightab': seasonType === season}" data-toggle="tab"  role="tab"  aria-selected="true"  (click)="showSeason(season)" >Season{{season}}</a>
+      </li>
+   </ul>
+   <div  [ngSwitch]="seasonType">
+      <div *ngFor="let season of noofSeasons">
+         <div *ngSwitchCase="season">
+            <div class="card-container">
+               <div *ngFor="let eachepisode of seasonsEpisodes">
+                  <div class="col d-flex justify-content-center">
+                     <a class="card" target="_blank" rel="noopener" *ngIf="eachepisode.season == season">
+                        <div>
+                           {{eachepisode.name.replaceAll('.','')}}
+                           <img class="card-img-top" src={{eachepisode.image.medium}} alt="Card image">
+                        </div>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

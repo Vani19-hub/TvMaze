@@ -1,0 +1,36 @@
+<div class="content" role="main">
+   <div class="searchBars">
+      <span>
+         <form class="form-inline">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input #myInput class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Enter showname" aria-label="Search" (input)="filterItem(myInput.value)">
+         </form>
+      </span>
+      <span>
+         <div class="form-group">
+            <select class="form-control" (change)="chooseGenre($event)" [(ngModel)]="selectedValue">
+            <option disabled  selected [ngValue]="selectedValue" >{{selectedValue}}</option>
+            <option  *ngFor="let genre of showGenreBased">{{genre}}</option>
+            </select>
+         </div>
+      </span>
+      <span>
+      <button type="button" id="reset" class="btn btn-default" (click)="resetFilter()">Reset</button> 
+      </span>
+   </div>
+   <h5 class="card-title">{{selectedGenre}}</h5>
+   <div class="card-container">
+      <h6 class="noresult" *ngIf="allShows.length == 0">No Search results found</h6>
+      <div *ngFor="let show of allShows | orderBy: 'rating.average'" >
+         <div class="col d-flex justify-content-center">
+            <a class="card getDetails"  target="_blank" rel="noopener" (click)="getShowDetails(show.id)" *ngIf="show.image !== null">
+            <div>
+               <img class="card-img-top" src={{show.image.medium}} alt="Card image">
+               <p>{{show.name}}</p>
+               <p class="rating">{{show.rating.average}}/10</p>
+            </div>
+            </a>
+         </div>
+      </div>
+   </div>
+</div>
