@@ -38,8 +38,8 @@
          <div *ngSwitchCase="season">
             <div class="card-container">
                <div *ngFor="let eachepisode of seasonsEpisodes">
-                  <div class="col d-flex justify-content-center">
-                     <a class="card" target="_blank" rel="noopener" *ngIf="eachepisode.season == season">
+                  <div class="col d-flex justify-content-center" *ngIf="eachepisode.season == season">
+                     <a class="card" target="_blank" rel="noopener" >
                         <div>
                            {{eachepisode.name.replaceAll('.','')}}
                            <img class="card-img-top" src={{eachepisode?.image?.medium}} alt="Card image">
