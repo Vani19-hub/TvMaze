@@ -20,8 +20,8 @@ describe('AppComponent', () => {
   let router: Router;
   let location: Location;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [
         AppComponent,

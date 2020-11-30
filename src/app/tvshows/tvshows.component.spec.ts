@@ -1,5 +1,4 @@
 import {
-  async,
   ComponentFixture,
   fakeAsync,
   TestBed,
@@ -26,8 +25,8 @@ describe('TvshowsComponent', () => {
   let location: Location;
   let getService: TvshowService;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [TvshowsComponent, OrderByPipe],
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [Constants],

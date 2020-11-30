@@ -19,8 +19,8 @@ describe('TvshowDetailsComponent', () => {
   let fixture: ComponentFixture<TvshowDetailsComponent>;
   let getService: TvshowService;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [TvshowDetailsComponent],
       providers: [Constants, TvshowService],
