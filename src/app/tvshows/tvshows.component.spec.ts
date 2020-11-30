@@ -20,7 +20,6 @@ import { AllShows } from './tvshow.model';
 describe('TvshowsComponent', () => {
   let component: TvshowsComponent;
   let fixture: ComponentFixture<TvshowsComponent>;
-  // let getService: TvshowService;
   let router: Router;
   let location: Location;
   let getService: TvshowService;

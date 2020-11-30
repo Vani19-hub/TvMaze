@@ -1,7 +1,6 @@
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <a href="#" class="previous" *ngIf="isHomeRouteActivated()">&laquo; Previous</a>
-  <!-- <a  [routerLink]="'/home'">Home</a> -->
+  <a [routerLink]="'/home'" class="previous" *ngIf="isHomeRouteActivated()">&laquo; Previous</a>
   <p class="title">{{title}}</p>
 </div>
 <router-outlet></router-outlet>
