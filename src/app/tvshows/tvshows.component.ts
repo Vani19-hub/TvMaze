@@ -16,8 +16,7 @@ export class TvshowsComponent implements OnInit {
   selectedShows = [];
   selectedValue = 'Category';
   searchData = [];
-  @ViewChild('myInput')
-  myInputVariable: ElementRef;
+  showName = '';
   constructor(private tvshowservice: TvshowService, private router: Router) {}
 
   ngOnInit(): void {
@@ -52,7 +51,7 @@ export class TvshowsComponent implements OnInit {
   chooseGenre(e: any): void {
     // Selecting genre from list of categories
     this.selectedGenre = e.target.value;
-    this.myInputVariable.nativeElement.value = '';
+    this.showName = '';
     this.getAllShows(this.selectedGenre);
   }
 
@@ -62,7 +61,7 @@ export class TvshowsComponent implements OnInit {
     this.getAllShows(this.selectedGenre);
     this.selectedValue = 'Category';
     this.selectedGenre = 'Popular Shows';
-    this.myInputVariable.nativeElement.value = '';
+    this.showName = '';
   }
 
   getShowDetails(id): void {
