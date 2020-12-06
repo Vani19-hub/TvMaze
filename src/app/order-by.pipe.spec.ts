@@ -1,5 +1,3 @@
-import { Pipe, PipeTransform } from '@angular/core';
-
 import { OrderByPipe } from './order-by.pipe';
 
 describe('OrderByPipe', () => {

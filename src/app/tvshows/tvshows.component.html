@@ -2,8 +2,10 @@
    <div class="searchBars">
       <span>
          <form class="form-inline">
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <input type="text" class="form-control form-control-sm ml-3 w-75" id="name" placeholder="Enter showname" [(ngModel)]="showName" name="showName"  (input)="filterItem(showName)">
+            <div class="searchInput">
+               <input  type="text" class="form-control form-control-sm ml-3 w-75" id="name" placeholder="Enter show" [(ngModel)]="showName" name="showName"  (keydown.enter)="filterItem(showName)">
+               <fa-icon [icon]="faSearch"></fa-icon>
+            </div>   
          </form>
       </span>
       <span>
@@ -20,17 +22,31 @@
    </div>
    <h5 class="card-title">{{selectedGenre}}</h5>
    <div class="card-container">
-      <h6 class="noresult" *ngIf="allShows.length == 0">No Search results found</h6>
-      <div *ngFor="let show of allShows | orderBy: 'rating.average'" >
+      <h6 class="noresult" *ngIf="allShows.length == 0 ">No Search results found</h6>
+      <div *ngFor="let show of allShows | orderBy: 'rating.average'  | paginate : {
+         itemsPerPage: tableSize,
+         currentPage: page,
+         totalItems: count
+       };
+ let i = index"  [class.active]="i == currentIndex">
          <div class="col d-flex justify-content-center">
             <a class="card getDetails"  target="_blank" rel="noopener" (click)="getShowDetails(show.id)" *ngIf="show.image !== null">
             <div>
                <img class="card-img-top" src={{show?.image?.medium}} alt="Card image">
                <p>{{show?.name}}</p>
-               <p class="rating">{{show?.rating?.average}}/10</p>
+               <p class="rating">{{show?.rating?.average === null ? 0 : show?.rating?.average}}/10</p>
             </div>
             </a>
          </div>
       </div>
    </div>
+
+   <div class="d-flex justify-content-center"  *ngIf="allShows.length != 0 ">
+      <pagination-controls
+        responsive="true" 
+        previousLabel="Prev" 
+        nextLabel="Next" 
+        (pageChange)="onDataChange($event)">
+      </pagination-controls>
+    </div>
 </div>

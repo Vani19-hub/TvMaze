@@ -10,8 +10,9 @@ import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { TvshowService } from '../common/tvshow.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
+import { TvshowService } from '../common/tvshow.service';
 import { TvshowsComponent } from './tvshows.component';
 import { Constants } from '../config/constants';
 import { OrderByPipe } from '../order-by.pipe';
@@ -27,7 +28,11 @@ describe('TvshowsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TvshowsComponent, OrderByPipe],
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        NgxPaginationModule,
+      ],
       providers: [Constants],
     }).compileComponents();
   });
@@ -45,6 +50,10 @@ describe('TvshowsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have onDataChange function', () => {
+    expect(component.onDataChange).toBeTruthy();
   });
 
   it('should set all shows', () => {
@@ -76,7 +85,7 @@ describe('TvshowsComponent', () => {
     fixture.detectChanges();
     spyOn(component, 'filterItem').and.callThrough(); // method attached to the click.
     const btn = fixture.debugElement.query(By.css('input'));
-    btn.triggerEventHandler('input', null);
+    btn.triggerEventHandler('keydown.enter', null);
     tick(); // simulates the passage of time until all pending asynchronous activities finish
     fixture.detectChanges();
     expect(component.filterItem).toHaveBeenCalled();
@@ -97,7 +106,7 @@ describe('TvshowsComponent', () => {
     select.value = select.options[0].value;
     select.dispatchEvent(new Event('change'));
     fixture.detectChanges();
-    expect(component.selectedGenre).toBe('Category');
+    expect(component.selectedGenre).toBe('category');
   });
 
   it('should call getDetails and return list of showdetails', fakeAsync(() => {
@@ -114,5 +123,10 @@ describe('TvshowsComponent', () => {
     component.filterItem('Family');
     fixture.detectChanges();
     expect(component.allShows).toEqual(response);
+  }));
+
+  it('show season', fakeAsync(() => {
+    component.onDataChange('');
+    expect(component.showName).toBe('');
   }));
 });

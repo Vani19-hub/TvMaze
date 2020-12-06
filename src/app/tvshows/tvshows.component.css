@@ -147,9 +147,6 @@ a:hover {
 }
 
 @media screen and (min-width :909px) {
-	.form-inline {
-		width: 400px;
-	}
 	.toolbar {
 		left: 210px;
 		font-size: 10px;
@@ -165,4 +162,34 @@ a:hover {
 
 .searchBars {
 	display: flex;
+	align-items: center;
+}
+
+input[type=text] {  
+	padding: 12px 35px;  
+	margin: 8px 0;  
+	display: inline-block;  
+	border: 1px solid #ccc;  
+	box-sizing: border-box;  
+}  
+
+.searchInput fa-icon{ 
+	position: absolute; 
+	left: 26px; 
+	top: 13px; 
+	color: gray; 
+} 
+
+.searchInput { 
+	position: relative; 
+}
+
+@media screen and (max-width: 667px) {
+input[type=text],.form-control{  
+font-size: 12px;
+}	
+}
+
+.form-group {
+margin-bottom: 0rem;
 }

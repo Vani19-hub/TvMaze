@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import { TvshowService } from '../common/tvshow.service';
 
@@ -9,14 +10,18 @@ import { TvshowService } from '../common/tvshow.service';
   styleUrls: ['./tvshows.component.css'],
 })
 export class TvshowsComponent implements OnInit {
-  allShows = [];
-  error: string;
-  showGenreBased = [];
-  selectedGenre = 'Popular Shows';
-  selectedShows = [];
-  selectedValue = 'Category';
-  searchData = [];
-  showName = '';
+  public allShows = [];
+  public showGenreBased = [];
+  public selectedShows = [];
+  public selectedGenre = 'Popular Shows';
+  public selectedValue = 'category';
+  public showName = '';
+  public page = 1;
+  public count = 0;
+  public tableSize = 8;
+  public searchString = '';
+  faSearch = faSearch;
+
   constructor(private tvshowservice: TvshowService, private router: Router) {}
 
   ngOnInit(): void {
@@ -42,9 +47,7 @@ export class TvshowsComponent implements OnInit {
         }
         this.showGenreBased = [...new Set(this.showGenreBased)];
       },
-      (error) => {
-        this.error = error;
-      }
+      (error) => {}
     );
   }
 
@@ -59,9 +62,10 @@ export class TvshowsComponent implements OnInit {
     // Remove filter
     this.selectedGenre = '';
     this.getAllShows(this.selectedGenre);
-    this.selectedValue = 'Category';
+    this.selectedValue = 'category';
     this.selectedGenre = 'Popular Shows';
     this.showName = '';
+    this.page = 1;
   }
 
   getShowDetails(id): void {
@@ -72,10 +76,12 @@ export class TvshowsComponent implements OnInit {
 
   filterItem(value): void {
     // Filter items based on search
+    this.searchString = value;
+
     if (!value) {
       this.getAllShows('');
       this.selectedGenre = 'Popular Shows';
-      this.selectedValue = 'Category';
+      this.selectedValue = 'category';
     } // when nothing has typed
 
     this.tvshowservice.searchResults(value).subscribe(
@@ -85,5 +91,15 @@ export class TvshowsComponent implements OnInit {
       },
       (error) => {}
     );
+  }
+
+  onDataChange(event): void {
+    this.page = event;
+    // this.showName = '';
+    if (this.searchString) {
+      this.filterItem(this.searchString);
+    } else {
+      this.getAllShows('');
+    }
   }
 }

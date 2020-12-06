@@ -1,9 +1,4 @@
-import {
-  ComponentFixture,
-  fakeAsync,
-  TestBed,
-  tick,
-} from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
@@ -12,7 +7,6 @@ import { TvshowService } from '../common/tvshow.service';
 
 import { TvshowDetailsComponent } from './tvshow-details.component';
 import { Constants } from '../config/constants';
-import { By } from '@angular/platform-browser';
 
 describe('TvshowDetailsComponent', () => {
   let component: TvshowDetailsComponent;

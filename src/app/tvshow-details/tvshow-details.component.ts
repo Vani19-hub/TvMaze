@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./tvshow-details.component.css'],
 })
 export class TvshowDetailsComponent implements OnInit {
-  id: number;
-  showDetails = [];
-  seasonsEpisodes;
-  seasonType = 1;
-  noofSeasons = [];
+  public id: number;
+  public showDetails = [];
+  public seasonsEpisodes = [];
+  public seasonType = 1;
+  public noofSeasons = [];
 
   constructor(
     private tvshowservice: TvshowService,

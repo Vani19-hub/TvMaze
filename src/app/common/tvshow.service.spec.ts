@@ -1,4 +1,4 @@
-import { waitForAsync, inject, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -31,7 +31,7 @@ describe('TvshowService', () => {
   });
 
   it('should have getShowDetails function', () => {
-    expect(getService.getAllShows).toBeTruthy();
+    expect(getService.getShowDetails).toBeTruthy();
   });
 
   it('should have getshowEpisdoes function', () => {
