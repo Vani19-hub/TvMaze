@@ -81,9 +81,9 @@ export class TvshowsComponent implements OnInit {
     if (!value) {
       this.getAllShows('');
       this.selectedGenre = 'Popular Shows';
-      this.selectedValue = 'category';
     } // when nothing has typed
 
+    this.selectedValue = 'category';
     this.tvshowservice.searchResults(value).subscribe(
       (response) => {
         this.allShows = response;
