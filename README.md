@@ -12,12 +12,12 @@ Typescript
 
 # UI frameworks and Angular version
 
-Bootstrap Framework - 4.0
-HTML5
-CSS3
-Angular - @angular/cli - 10.2.0 ,
-Node
-Typescript
+Bootstrap Framework - 4.0.
+HTML5.
+CSS3.
+Angular - @angular/cli - 10.2.0 .
+Node.
+Typescript.
 
 # Unit test frameworks
 
@@ -46,7 +46,7 @@ Run `ng test` to execute the unit tests
 
 # Commands to generate new components,pipe,services...
 
-ng g component <name>
-ng g pipe <name>
-ng g service <name>
-ng g module <name>
+ng g component <name> .
+ng g pipe <name>.
+ng g service <name>.
+ng g module <name>.
