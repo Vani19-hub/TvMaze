@@ -44,7 +44,7 @@ describe('NotfoundComponent', () => {
     );
   });
 
-  it('should render not found text in a p tag', () => {
+  it('should render not found text in a a tag', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('a').textContent).toContain(
       'you might want to go to the home Page?'

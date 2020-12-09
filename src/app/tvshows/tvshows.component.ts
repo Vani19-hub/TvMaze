@@ -28,27 +28,24 @@ export class TvshowsComponent implements OnInit {
     this.getAllShows(''); // initial data to be loaded
   }
 
-  getAllShows(selectedGenre): void {
+  getAllShows(selectedGenre: string): void {
     // getting all the shows
     this.selectedShows = [];
-    this.tvshowservice.getAllShows().subscribe(
-      (response) => {
-        this.allShows = response;
-        this.allShows.filter((show: any) => {
-          show.genres.filter((genre: any) => {
-            this.showGenreBased.push(genre);
-            if (selectedGenre === genre) {
-              this.selectedShows.push(show);
-            }
-          }, this);
-        });
-        if (selectedGenre !== '') {
-          this.allShows = this.selectedShows;
-        }
-        this.showGenreBased = [...new Set(this.showGenreBased)];
-      },
-      (error) => {}
-    );
+    this.tvshowservice.getAllShows().subscribe((response) => {
+      this.allShows = response;
+      this.allShows.filter((show: any) => {
+        show.genres.filter((genre: any) => {
+          this.showGenreBased.push(genre);
+          if (selectedGenre === genre) {
+            this.selectedShows.push(show);
+          }
+        }, this);
+      });
+      if (selectedGenre !== '') {
+        this.allShows = this.selectedShows;
+      }
+      this.showGenreBased = [...new Set(this.showGenreBased)];
+    });
   }
 
   chooseGenre(e: any): void {
@@ -56,50 +53,54 @@ export class TvshowsComponent implements OnInit {
     this.selectedGenre = e.target.value;
     this.showName = '';
     this.getAllShows(this.selectedGenre);
+    this.page = 1;
   }
 
   resetFilter(): void {
     // Remove filter
-    this.selectedGenre = '';
-    this.getAllShows(this.selectedGenre);
+    this.getAllShows('');
     this.selectedValue = 'category';
     this.selectedGenre = 'Popular Shows';
     this.showName = '';
     this.page = 1;
   }
 
-  getShowDetails(id): void {
+  getShowDetails(id: string): void {
     // navigate to show details page
-    // tslint:disable-next-line: radix
-    this.router.navigate(['/showDetails', parseInt(id)]);
+    this.router.navigate(['/showDetails', Number(id)]);
   }
 
-  filterItem(value): void {
+  filterItem(value: string): void {
     // Filter items based on search
-    this.searchString = value;
 
-    if (!value) {
+    if (!this.showName) {
       this.getAllShows('');
       this.selectedGenre = 'Popular Shows';
     } // when nothing has typed
 
     this.selectedValue = 'category';
-    this.tvshowservice.searchResults(value).subscribe(
-      (response) => {
-        this.allShows = response;
-        this.allShows = this.allShows.map((item) => item.show);
-      },
-      (error) => {}
-    );
+    this.selectedGenre = `search results for '${this.showName}'`;
+    this.tvshowservice.searchResults(this.showName).subscribe((response) => {
+      this.allShows = response;
+      this.allShows = this.allShows.map((item) => item.show);
+    });
   }
 
-  onDataChange(event): void {
+  onDataChange(event: any): void {
     this.page = event;
-    // this.showName = '';
-    if (this.searchString) {
-      this.filterItem(this.searchString);
+    if (this.showName) {
+      this.filterItem(this.showName);
     } else {
-      this.getAllShows('');
+      this.getAllShows(this.selectedGenre);
+    }
+  }
+
+  rating(rating: any): string {
+    // returning string value based on rating
+    if (rating) {
+      return `${rating}/10`; // when rating is not null
+    } else {
+      return 'NA'; // rating is null
     }
   }
 }

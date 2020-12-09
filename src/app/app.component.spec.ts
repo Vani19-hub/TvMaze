@@ -7,6 +7,8 @@ import {
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { TvshowsComponent } from './tvshows/tvshows.component';
@@ -22,7 +24,7 @@ describe('AppComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, FontAwesomeModule, FormsModule],
       declarations: [
         AppComponent,
         TvshowsComponent,

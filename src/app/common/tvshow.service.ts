@@ -14,12 +14,12 @@ export class TvshowService {
     return this.http.get(`${this.constant.APIAllShows}shows`);
   }
 
-  public getShowDetails(id): Observable<any> {
+  public getShowDetails(id: number): Observable<any> {
     // get show details by id
     return this.http.get(`${this.constant.APIAllShows}shows/${id}`);
   }
 
-  public getshowEpisdoes(id): Observable<any> {
+  public getshowEpisdoes(id: number): Observable<any> {
     // get all episodes of show
     return this.http.get(`${this.constant.APIAllShows}shows/${id}/episodes`);
   }

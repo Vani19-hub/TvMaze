@@ -11,6 +11,7 @@ import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
 
 import { TvshowService } from '../common/tvshow.service';
 import { TvshowsComponent } from './tvshows.component';
@@ -24,6 +25,7 @@ describe('TvshowsComponent', () => {
   let router: Router;
   let location: Location;
   let getService: TvshowService;
+  let hostElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -32,6 +34,7 @@ describe('TvshowsComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         NgxPaginationModule,
+        FormsModule,
       ],
       providers: [Constants],
     }).compileComponents();
@@ -43,6 +46,7 @@ describe('TvshowsComponent', () => {
     fixture = TestBed.createComponent(TvshowsComponent);
     router.initialNavigation();
     component = fixture.componentInstance;
+    hostElement = fixture.nativeElement;
     fixture.detectChanges();
 
     getService = TestBed.inject(TvshowService);
@@ -61,52 +65,41 @@ describe('TvshowsComponent', () => {
     expect(component.allShows).toBeTruthy();
   });
 
-  it('should click resetFilter methd ', fakeAsync(() => {
-    fixture.detectChanges();
-    spyOn(component, 'resetFilter').and.callThrough(); // method attached to the click.
-    const btn = fixture.debugElement.query(By.css('button'));
-    btn.triggerEventHandler('click', null);
-    tick(); // simulates the passage of time until all pending asynchronous activities finish
-    fixture.detectChanges();
-    expect(component.resetFilter).toHaveBeenCalled();
-  }));
-
-  it('should click chooseGenre methd ', fakeAsync(() => {
-    fixture.detectChanges();
-    spyOn(component, 'chooseGenre').and.callThrough(); // method attached to the click.
-    const btn = fixture.debugElement.query(By.css('select'));
-    btn.triggerEventHandler('change', null);
-    tick(); // simulates the passage of time until all pending asynchronous activities finish
-    fixture.detectChanges();
-    expect(component.chooseGenre).toHaveBeenCalled();
-  }));
-
-  it('should click filterItem method ', fakeAsync(() => {
-    fixture.detectChanges();
-    spyOn(component, 'filterItem').and.callThrough(); // method attached to the click.
-    const btn = fixture.debugElement.query(By.css('input'));
-    btn.triggerEventHandler('keydown.enter', null);
-    tick(); // simulates the passage of time until all pending asynchronous activities finish
-    fixture.detectChanges();
-    expect(component.filterItem).toHaveBeenCalled();
-  }));
-
-  it('no results found', () => {
-    const h6 = fixture.nativeElement.querySelector('h6');
-    expect(h6.textContent).toEqual('No Search results found');
+  it('set selectedShows to empty when getAllShows method is clicked ', () => {
+    component.getAllShows('Family');
+    expect(component.selectedShows.length).toEqual(0);
   });
+
+  it('click on card to navigate to tvshow details page ', () => {
+    const navigateSpy = spyOn(router, 'navigate');
+    const id = '1';
+    component.getShowDetails(id);
+    expect(navigateSpy).toHaveBeenCalledWith(['/showDetails', Number(id)]);
+  });
+
+  it('change default page to 1 when resetFilter method is clicked ', () => {
+    component.resetFilter();
+    expect(component.page).toBe(1);
+  });
+
+  it('clear showName when chooseGenre method is clicked ', fakeAsync(() => {
+    const select: HTMLInputElement = hostElement.querySelector('select');
+    select.value = 'category';
+    select.dispatchEvent(new Event('select'));
+    fixture.detectChanges();
+    expect(component.showName).toBe('');
+  }));
+
+  it('if filter applied set selectedGenre  when filterItem method is clicked ', fakeAsync(() => {
+    component.showName = 'search string';
+    const result = `search results for '${component.showName}'`;
+    component.filterItem(component.showName);
+    expect(component.selectedGenre).toEqual(result);
+  }));
 
   it('#resetGenre()', () => {
     component.resetFilter();
     expect(component.selectedGenre).toBe('Popular Shows');
-  });
-
-  it('#chooseGenre() should choose #genre', () => {
-    const select = fixture.debugElement.query(By.css('select')).nativeElement;
-    select.value = select.options[0].value;
-    select.dispatchEvent(new Event('change'));
-    fixture.detectChanges();
-    expect(component.selectedGenre).toBe('category');
   });
 
   it('should call getDetails and return list of showdetails', fakeAsync(() => {
@@ -125,8 +118,30 @@ describe('TvshowsComponent', () => {
     expect(component.allShows).toEqual(response);
   }));
 
-  it('show season', fakeAsync(() => {
+  it('if clicked pagination on data change should call filterItem', fakeAsync(() => {
+    component.showName = 'search string';
     component.onDataChange('');
-    expect(component.showName).toBe('');
+    tick();
+    fixture.detectChanges();
+    expect(component.selectedValue).toEqual('category');
+
+    component.showName = '';
+    component.onDataChange('');
+    tick();
+    fixture.detectChanges();
+    expect(component.selectedShows.length).toEqual(0);
+  }));
+
+  it('if rating ? returns rating :else NA', fakeAsync(() => {
+    const falseresult = component.rating('');
+    tick();
+    fixture.detectChanges();
+    expect(falseresult).toEqual('NA');
+
+    const trueresult = component.rating('9');
+    component.onDataChange('');
+    tick();
+    fixture.detectChanges();
+    expect(trueresult).toEqual('9/10');
   }));
 });

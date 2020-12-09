@@ -86,12 +86,12 @@ p {
 a,
 a:visited,
 a:hover {
-	color: #999999;
+	color: #111010;
 	text-decoration: none;
 }
 
 a:hover {
-	color: #999999;
+	color: #0c0b0b;
 }
 
 
@@ -161,3 +161,6 @@ a:hover {
 		font-size: 15px;
 	}
 }
+
+
+

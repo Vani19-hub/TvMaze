@@ -24,7 +24,7 @@ p {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	margin-top: 16px;
+	margin-top: 6px;
 }
 
 .card {
@@ -63,12 +63,12 @@ p {
 }
 
 .card-container .card:not(.highlight-card):hover .material-icons path {
-	fill: rgb(105, 103, 103);
+	fill: rgb(15, 14, 14);
 }
 
 .card.highlight-card {
 	background-color: #999999;
-	color: white;
+	color: rgb(20, 19, 19);
 	font-weight: 600;
 	border: none;
 	width: auto;
@@ -83,12 +83,12 @@ p {
 a,
 a:visited,
 a:hover {
-	color: #999999;
+	color: #0a0909;
 	text-decoration: none;
 }
 
 a:hover {
-	color: #999999;
+	color: #0a0909;
 }
 
 
@@ -156,3 +156,21 @@ font-size: 12px;
 .form-group {
 margin-bottom: 0rem;
 }
+
+.showName{
+	white-space: nowrap; 
+	width: 100px; 
+	overflow: hidden;
+	text-overflow: ellipsis; 
+}
+
+.showName:hover {
+	overflow: visible;
+	white-space: initial;
+	font-size: 15px;
+	line-height: normal;
+	width:150px
+
+}
+
+

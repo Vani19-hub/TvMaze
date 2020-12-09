@@ -9,7 +9,6 @@ import { TvshowService } from './tvshow.service';
 
 describe('TvshowService', () => {
   let getService: TvshowService;
-  //   const constant: Constants;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {

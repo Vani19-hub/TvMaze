@@ -31,8 +31,7 @@ export class TvshowDetailsComponent implements OnInit {
   getshowDetails(): void {
     // getting each show details
     this.actRouter.params.subscribe((params) => {
-      // tslint:disable-next-line: radix
-      this.id = parseInt(params.id);
+      this.id = Number(params.id);
     });
     this.tvshowservice.getShowDetails(this.id).subscribe(
       (response) => {
@@ -46,20 +45,17 @@ export class TvshowDetailsComponent implements OnInit {
 
   getshowEpisodes(): void {
     // get all the episodes of season for each show
-    this.tvshowservice.getshowEpisdoes(this.id).subscribe(
-      (response) => {
-        this.seasonsEpisodes = response;
-        this.seasonsEpisodes.filter((seasonNo) => {
-          this.noofSeasons.push(seasonNo.season);
-        });
-        this.noofSeasons = [...new Set(this.noofSeasons)];
-      },
-      (error) => {}
-    );
+    this.tvshowservice.getshowEpisdoes(this.id).subscribe((response) => {
+      this.seasonsEpisodes = response;
+      this.seasonsEpisodes.filter((seasonNo) => {
+        this.noofSeasons.push(seasonNo.season);
+      });
+      this.noofSeasons = [...new Set(this.noofSeasons)];
+    });
   }
 
-  showSeason(season): void {
-    // dynamic tabs based on data
+  showSeason(season: number): void {
+    // dynamic tabs data based on season
     this.seasonType = season;
   }
 }

@@ -4,7 +4,7 @@
          <div class="col-sm-3">
             <div class="card-container">
                <div >
-                  <a class="card" target="_blank" rel="noopener">
+                  <a class="card">
                      <div>
                         <img class="card-img-top" src={{showDetails?.image?.medium}}  alt="Card image">
                      </div>
@@ -39,7 +39,7 @@
             <div class="card-container">
                <div *ngFor="let eachepisode of seasonsEpisodes">
                   <div class="col d-flex justify-content-center" *ngIf="eachepisode.season == season">
-                     <a class="card" target="_blank" rel="noopener" >
+                     <a class="card" >
                         <div>
                            {{eachepisode.name.replaceAll('.','')}}
                            <img class="card-img-top" src={{eachepisode?.image?.medium}} alt="Card image">

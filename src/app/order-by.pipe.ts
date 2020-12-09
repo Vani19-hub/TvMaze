@@ -9,13 +9,13 @@ export class OrderByPipe implements PipeTransform {
       return null;
     }
 
-    function goDeep(obj: any, desc: any): any {
+    const goDeep = (obj: any, desc: any) => {
       const arr = desc.split('.');
       obj = obj[arr.shift()];
       while (arr.length && obj) {
         return obj;
       }
-    }
+    };
 
     array.sort((a: any, b: any) => {
       const aDeep = goDeep(a, args);
