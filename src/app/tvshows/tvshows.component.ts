@@ -91,7 +91,9 @@ export class TvshowsComponent implements OnInit {
     if (this.showName) {
       this.filterItem(this.showName);
     } else {
-      this.getAllShows(this.selectedGenre);
+      if (this.selectedGenre !== 'Popular Shows') {
+        this.getAllShows(this.selectedGenre);
+      }
     }
   }
 

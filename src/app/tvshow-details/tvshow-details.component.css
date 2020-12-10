@@ -153,6 +153,10 @@ a:hover {
 	.jumbotron {
 		padding: 2rem 2rem;
 	}
+
+	.col-sm-3 {
+		max-width: 50%;
+	}
 }
 
 @media (min-width: 1366px) {

@@ -6,12 +6,12 @@ import {
 } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { TvshowService } from '../common/tvshow.service';
 import { TvshowsComponent } from './tvshows.component';
@@ -35,6 +35,7 @@ describe('TvshowsComponent', () => {
         RouterTestingModule,
         NgxPaginationModule,
         FormsModule,
+        FontAwesomeModule,
       ],
       providers: [Constants],
     }).compileComponents();
